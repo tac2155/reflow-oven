@@ -57,11 +57,23 @@ void PWM_init(void) {
 	PORT_PWM &= ~PWM_HEAT;
 }
 
+void UART_init(void) {
+	//set Baud Rate
+	UBRR0H = (uint8_t) (MYUBBR >> 8);
+	UBRR0L = (uint8_t) MYUBBR;
+
+
+	// enable transmission and receiving
+	UCSR0B |= (1 << RXEN0) | (1 << TXEN0);
+	// Set frame format: 8 data, 2 stop bit
+	UCSR0C = (1<<USBS0)|(3<<UCSZ00);
+}
+
 float SPI_readTemp(void) {
 	uint16_t value;
 	float currentTemp;
 
-	uint16_t hi = 0;
+	uint8_t hi = 0;
 	uint8_t lo = 0;
 
 	// set SS to low to beging transfer
@@ -93,10 +105,39 @@ float SPI_readTemp(void) {
 
 	else {
 		value = ((hi << 5) | (lo >> 3));
+		//bit 15 unnecessary
 		value &= ~(1<<15);
 		// temp is 1/4 of outputed value
 		currentTemp = 0.25*value;
 		return currentTemp;
 	}
+}
+
+void USART_Transmit(float temp) {
+	//break 32 bit float into 4 bytes
+	uint8_t data4 = (uint8_t) (temp >> 24);
+	uint8_t data3 = (uint8_t) (temp >> 16);
+	uint8_t data2 = (uint8_t) (temp >> 8);
+	uint8_t data1 = (uint8_t) temp;
+
+	// Wait for empty transmit buffer 
+	while ( !( UCSR0A & (1<<UDRE0)) );
+	// Put data into buffer, sends the data 
+	UDR0 = data4;
+
+	// Wait for empty transmit buffer 
+	while ( !( UCSR0A & (1<<UDRE0)) );
+	// Put data into buffer, sends the data 
+	UDR0 = data3;
+
+	// Wait for empty transmit buffer 
+	while ( !( UCSR0A & (1<<UDRE0)) );
+	// Put data into buffer, sends the data 
+	UDR0 = data2;
+
+	// Wait for empty transmit buffer 
+	while ( !( UCSR0A & (1<<UDRE0)) );
+	// Put data into buffer, sends the data 
+	UDR0 = data1;	
 }
 
