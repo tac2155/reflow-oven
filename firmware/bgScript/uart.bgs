@@ -1,0 +1,84 @@
+# BGScript Code to run UART on BLE112
+
+# used for internal data buffer
+dim buf1(16)
+dim count
+dim buffer_pointer
+
+# used for BD Addr
+dim bdaddr(6)
+dim readeraddr(6)
+
+# check if BLE is connected
+# data only recieved if ble is connected
+dim connected
+
+# System start/boot listener
+event system_boot(major,minor,patch,build,ll_version,protocol,hw)
+	
+	# read local devices public bluetooth address
+	call system_address_get()(bdaddr(0:6))
+
+	# set connection flag to 0
+	connected = 0
+
+	#create addr buffer (hex)
+	readeraddr(0:1) = bdaddr(5:1)
+	readeraddr(1:1) = bdaddr(4:1)
+	readeraddr(2:1) = bdaddr(3:1)
+	readeraddr(3:1) = bdaddr(2:1)
+	readeraddr(4:1) = bdaddr(1:1)
+	readeraddr(5:1) = bdaddr(0:1)
+
+	# write the bd address characteristic
+	call attributes_write(xgatt_bdaddr, 0, 6, readeraddr(0:6))
+
+
+	# broadcast yourself and make bondable
+	call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
+	call sm_set_bondable_mode(1)
+
+	# start continuous time with 1 second interval
+	call hardware_set_soft_timer($8000, 1, 0)
+end
+ 
+# Timer event(s) listener - gets called every second thanks to hardware_set_soft_timer
+event hardware_soft_timer(handle)
+	# 1 second timer expired
+	if handle = 1 then
+		call system_endpoint_tx(5, 14, "TIMER EXPIRED\n")
+ 	end if
+end
+
+event attributes_value(connection, reason, handle, offset, value_len, value_data)
+  # On write to the display
+  if handle = x_temp_recv then
+  	#do something with this value
+  end if
+  	
+end
+
+event system_endpoint_watermark_rx(endpoint, size)
+	if endpoint = system_endpoint_uart0 then
+		in_len = size
+		call system_endpoint_set_watermarks(system_endpoint_uart0, 0, $ff)
+		call system_endpoint_rx(system_endpoint_uart0, in_len) (result, in_len, sensors(0:in_len))
+		call system_endpoint_set_watermarks(system_endpoint_uart0, 10, $ff)
+
+
+		# after you get the temp from UART write to the bluetooth client
+		# Write data to biolog attribute
+	    call attributes_write(x_temp_sender,0,in_len,sensors(0:in_len))
+end
+# Connection event listener
+event connection_status(connection, flags, address, address_type, conn_interval, timeout, latency, bonding)
+  # device just connected
+end
+
+
+# Disconnection event
+event connection_disconnected(handle,result)
+	# broadcast yourself and make bondable
+	call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
+	call sm_set_bondable_mode(1)
+end

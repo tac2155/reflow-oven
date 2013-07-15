@@ -31,7 +31,7 @@
 #define PWM_HEAT (1<<6)
 
 // max temp for reflow oven to reach
-#define MAX_TEMP 235
+#define MAX_TEMP 150
 //#define CYCLE 255
 
 // function prototypes

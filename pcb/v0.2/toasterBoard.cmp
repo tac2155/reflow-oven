@@ -1,0 +1,248 @@
+Cmp-Mod V01 Created by CvPcb (2013-05-31 BZR 4019)-stable date = 7/15/2013 10:26:50 AM
+
+BeginCmp
+TimeStamp = /51B24963;
+Reference = C1;
+ValeurCmp = 22pF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B24972;
+Reference = C2;
+ValeurCmp = 22pF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B249D6;
+Reference = C3;
+ValeurCmp = 0.1uF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F662;
+Reference = C4;
+ValeurCmp = 10uF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B24E44;
+Reference = C6;
+ValeurCmp = 0.1uF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B26184;
+Reference = C7;
+ValeurCmp = 1uF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B2616B;
+Reference = C8;
+ValeurCmp = 1uF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B2615C;
+Reference = C9;
+ValeurCmp = 1uF;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F5C8;
+Reference = F1;
+ValeurCmp = 500mA;
+IdModule  = 1206(3216m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B2472F;
+Reference = IC1;
+ValeurCmp = ATMEGA328P_TQFP;
+IdModule  = TQFP32_7mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F2FF;
+Reference = IC2;
+ValeurCmp = MIC5205;
+IdModule  = SOT23-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B24889;
+Reference = IC3;
+ValeurCmp = MAX6675;
+IdModule  = SOIC8;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B2487A;
+Reference = IC4;
+ValeurCmp = BLE112-A;
+IdModule  = BLE112-A;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F7C4;
+Reference = J1;
+ValeurCmp = MICROUSB;
+IdModule  = MICROUSB_sm;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B26361;
+Reference = J2;
+ValeurCmp = TOASTER;
+IdModule  = ED110;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B60893;
+Reference = J3;
+ValeurCmp = CC_ISP;
+IdModule  = 2x5-array;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B26352;
+Reference = K1;
+ValeurCmp = S116S02F;
+IdModule  = SHARP_SIP_SSR;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5EE1C;
+Reference = LED1;
+ValeurCmp = HEAT_ON;
+IdModule  = 0603(1608m)_led;
+EndCmp
+
+BeginCmp
+TimeStamp = /51E3482D;
+Reference = LED2;
+ValeurCmp = PWR_ON;
+IdModule  = 0603(1608m)_led;
+EndCmp
+
+BeginCmp
+TimeStamp = /51E34AE7;
+Reference = LED3;
+ValeurCmp = BT_CONN;
+IdModule  = 0603(1608m)_led;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B2473E;
+Reference = P1;
+ValeurCmp = AVR_ISP;
+IdModule  = 2x3-array;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F30D;
+Reference = Q1;
+ValeurCmp = 2N3904;
+IdModule  = TO92;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B25502;
+Reference = R1;
+ValeurCmp = 10k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F488;
+Reference = R2;
+ValeurCmp = 330;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5ECD3;
+Reference = R3;
+ValeurCmp = 330;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5F479;
+Reference = R4;
+ValeurCmp = 10k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5ECC4;
+Reference = R5;
+ValeurCmp = 70;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B25762;
+Reference = R6;
+ValeurCmp = 10k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5FD8B;
+Reference = R7;
+ValeurCmp = 10k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B5FE22;
+Reference = R8;
+ValeurCmp = 10k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51E3483C;
+Reference = R9;
+ValeurCmp = 1k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51E34AD8;
+Reference = R10;
+ValeurCmp = 1k;
+IdModule  = 0603(1608m);
+EndCmp
+
+BeginCmp
+TimeStamp = /51B2558B;
+Reference = S1;
+ValeurCmp = RESET;
+IdModule  = SPST_4-pin-sm;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B24898;
+Reference = TC1;
+ValeurCmp = THERMOCOUPLE;
+IdModule  = THERMOCOUPLE_MINI_PCC-SMP;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B24767;
+Reference = Y1;
+ValeurCmp = 8 MHz;
+IdModule  = XTAL_TXC_7A;
+EndCmp
+
+EndListe

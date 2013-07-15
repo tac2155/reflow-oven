@@ -59,8 +59,8 @@ void PWM_init(void) {
 
 void UART_init(void) {
 	//set Baud Rate
-	UBRR0H = (uint8_t) (MYUBBR >> 8);
-	UBRR0L = (uint8_t) MYUBBR;
+	UBRR0H = (uint8_t) (MYUBRR >> 8);
+	UBRR0L = (uint8_t) MYUBRR;
 
 
 	// enable transmission and receiving
@@ -113,7 +113,7 @@ float SPI_readTemp(void) {
 	}
 }
 
-void USART_Transmit(float temp) {
+/*void USART_Transmit(float temp) {
 	//break 32 bit float into 4 bytes
 	uint8_t data4 = (uint8_t) (temp >> 24);
 	uint8_t data3 = (uint8_t) (temp >> 16);
@@ -139,5 +139,5 @@ void USART_Transmit(float temp) {
 	while ( !( UCSR0A & (1<<UDRE0)) );
 	// Put data into buffer, sends the data 
 	UDR0 = data1;	
-}
+}*/
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+  <!-- 1800: org.bluetooth.service.generic_access -->
+  <service uuid="1800" id="generic_access" >
+    <description>Generic Access</description>
+
+    <!-- 2A00: org.bluetooth.characteristic.gap.device_name -->
+    <characteristic uuid="2A00" id="c_device_name" >
+      <description>Device Name</description>
+      <properties read="true" const="true" />
+      <value>Reflow Oven</value>
+    </characteristic>
+
+    <!-- 2A01: org.bluetooth.characteristic.gap.appearance -->
+    <characteristic uuid="2A01" id="c_appearance">
+      <description>Appearance</description>
+      <properties read="true" const="true" />
+      <!-- 128: Generic Computer, Generic category -->
+      <value type="hex">4142</value>
+    </characteristic>
+
+  </service>
+
+  <!-- 180A: org.bluetooth.service.device_information -->
+  <service uuid="180A" id="device_information"  advertise="true">
+    <description>Device Information</description>
+
+    <!-- 2A29: org.bluetooth.characteristic.manufacturer_name_string -->
+    <characteristic uuid="2A29" id="c_manufacturer_name">
+      <description>Manufacturer Name</description>
+      <properties read="true" const="true" />
+      <value>Lightwave, LLC</value>
+    </characteristic>
+
+    <!-- 2A24: org.bluetooth.characteristic.model_number_string -->
+    <characteristic uuid="2A24" id="c_model_number">
+      <description>Model Number</description>
+      <properties read="true" const="true" />
+      <value>Reflow Oven 0.3</value>
+    </characteristic>
+
+    <!-- Firmware Revision String -->
+    <!-- org.bluetooth.characteristic.firmware_revision_string -->
+    <characteristic uuid="2a26">
+        <properties read="true" const="true" />
+        <value>0.1</value>
+      <description>Firmware Revision String</description>
+    </characteristic> 
+
+    
+    <!-- Hardware Revision String -->
+    <!-- org.bluetooth.characteristic.hardware_revision_string -->
+    <characteristic uuid="2a27">
+        <properties read="true" const="true" />
+        <value>0.3</value>
+      <description>Hardware Revision String</description>
+    </characteristic>         
+  </service>
+
+ 
+  <!-- custom service for reflow oven -->
+  <service uuid="1234" id="temp" advertise="true">
+    <description>Temp services</description
+
+    <characteristic uuid="ADAD" id="xgatt_bdaddr">
+      <description>BD-Addr</description>
+      <properties read="true" />
+      <value type="hex">001122334455</value>
+    </characteristic>
+
+    <characteristic uuid="RXRX" id="xgatt_RX">
+      <description>RX</description>
+      <properties read="true" notify="true" />
+      <value length="16" value="hex" variable_length="true"></value>
+    </characteristic>
+
+    <characteristc uuid="RXBF" id="xgatt_rx_buf_count">
+      <description>RX Buffer Count</description>
+      <properties read="true" />
+      <value length="1" value "hex" variable_length="false"></value>
+    </characteristic>
+
+
+    <characteristc uuid="RXBC" id="xgatt_rx_buf_clear">
+      <description>RX Buffer Clear</description>
+      <properties write="true" read="true" />
+      <value length="1" value "hex" variable_length="false"></value>
+    </characteristic>
+
+
+    <characteristic uuid="TXTX" id="xgatt_TX">
+      <description>TX</description>
+      <properties read="true" write="true" />
+      <value length="17" value="hex" variable_length="true"></value>
+    </characteristic>
+  </service>
+
+</configuration>
+
