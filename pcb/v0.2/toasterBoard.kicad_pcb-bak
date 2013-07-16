@@ -179,7 +179,7 @@
     )
   )
 
-  (module TQFP32_7mm (layer F.Cu) (tedit 5186F557) (tstamp 51E43AD6)
+  (module TQFP32_7mm (layer F.Cu) (tedit 51E44A5B) (tstamp 51E43AD6)
     (at 255.905 133.604 315)
     (tags "QFP TQFP 32")
     (path /51B2472F)
@@ -187,7 +187,7 @@
     (fp_text reference IC1 (at 0 7.00024 315) (layer F.SilkS) hide
       (effects (font (size 1.524 1.524) (thickness 0.3048)))
     )
-    (fp_text value ATMEGA328P_TQFP (at -1.99898 -6.49986 315) (layer F.SilkS) hide
+    (fp_text value ATMEGA328P (at -6.986639 1.670328 405) (layer F.SilkS)
       (effects (font (size 1.524 1.524) (thickness 0.3048)))
     )
     (fp_circle (center -2.49936 -2.49936) (end -2.49936 -2.99974) (layer F.SilkS) (width 0.381))
@@ -621,13 +621,13 @@
     )
   )
 
-  (module ED110 (layer F.Cu) (tedit 513298C8) (tstamp 51E43B6B)
+  (module ED110 (layer F.Cu) (tedit 51E44A2A) (tstamp 51E43B6B)
     (at 225.806 133.604 270)
     (path /51B26361)
-    (fp_text reference J2 (at 6.35 6.604 270) (layer F.SilkS)
+    (fp_text reference J2 (at 6.35 6.604 270) (layer F.SilkS) hide
       (effects (font (size 1.524 1.524) (thickness 0.3048)))
     )
-    (fp_text value TOASTER (at -2.54 -5.588 270) (layer F.SilkS)
+    (fp_text value TOASTER (at 9.271 -0.2794 360) (layer F.SilkS)
       (effects (font (size 1.524 1.524) (thickness 0.3048)))
     )
     (fp_line (start 0 4.826) (end 1.27 3.556) (layer F.SilkS) (width 0.381))
