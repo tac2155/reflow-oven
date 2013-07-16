@@ -1,6 +1,6 @@
 # reflow oven control
-# new circuit board to control reflow ove
-# http://github.com/lightwave-io/r-and-d
+# new circuit board to control reflow oven
+# http://github.com/tac2155/reflow-oven
 #
 
 # makefile
@@ -28,8 +28,7 @@ HFU = 0xDE
 EFU = 0x05
 # program source files (not including external libraries)
 SRC = $(PRJ).cpp
-# where to look for aditional libraries (consisting of a .cpp file and .h files)
-# LIB  = ../../TLC5940
+
 
 ##########################################################################################
 # stuff nobody needs to worry about until such time that worrying about it is appropriate

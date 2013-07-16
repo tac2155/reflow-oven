@@ -1,6 +1,6 @@
 // reflow oven
 // reflow oven control for new circuit
-// http://github.com/lightwave-io/r-and-d
+// http://github.com/tac2155/reflow-oven
 //
 // copyright 2013 tim cousins
 

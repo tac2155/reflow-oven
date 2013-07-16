@@ -34,51 +34,71 @@ event system_boot(major,minor,patch,build,ll_version,protocol,hw)
 	call attributes_write(xgatt_bdaddr, 0, 6, readeraddr(0:6))
 
 
-	# broadcast yourself and make bondable
+	# set to advertise
 	call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
+	#set buffer pointer to 0
+	buffer_pointer = 0
+	#set recieved counter to 0
+	count = 0
+	#set to bondable mode
 	call sm_set_bondable_mode(1)
-
-	# start continuous time with 1 second interval
-	call hardware_set_soft_timer($8000, 1, 0)
-end
- 
-# Timer event(s) listener - gets called every second thanks to hardware_set_soft_timer
-event hardware_soft_timer(handle)
-	# 1 second timer expired
-	if handle = 1 then
-		call system_endpoint_tx(5, 14, "TIMER EXPIRED\n")
- 	end if
 end
 
 event attributes_value(connection, reason, handle, offset, value_len, value_data)
-  # On write to the display
-  if handle = x_temp_recv then
-  	#do something with this value
+  # Characteristic TX has been written
+  if handle=34 then 
+    call system_endpoint_tx(system_endpoint_uart1, value_len, value_data(0:value_len))
   end if
-  	
+  
+  # Characteristic clear RX buffer has been written
+  if handle=31
+    buffer_pointer = 0
+	count = 0
+	call attributes_write(xgatt_rx_buf_count, 0, 1, 0)	
+  end if
 end
 
-event system_endpoint_watermark_rx(endpoint, size)
-	if endpoint = system_endpoint_uart0 then
-		in_len = size
-		call system_endpoint_set_watermarks(system_endpoint_uart0, 0, $ff)
-		call system_endpoint_rx(system_endpoint_uart0, in_len) (result, in_len, sensors(0:in_len))
-		call system_endpoint_set_watermarks(system_endpoint_uart0, 10, $ff)
 
 
-		# after you get the temp from UART write to the bluetooth client
-		# Write data to biolog attribute
-	    call attributes_write(x_temp_sender,0,in_len,sensors(0:in_len))
+event system_endpoint_rx(endpoint, data_len, data_data) 
+  
+  # module must be connectd to change the buffer according to the
+  # UART data received.
+  if connected=1
+    if endpoint=system_endpoint_uart1
+    	
+	  if (buffer_pointer+data_len)>16
+		  #clip length to maximum buffer size, discard data that does not fit
+		  memcpy(buf1(buffer_pointer),data_data(0),16-buffer_pointer)
+		  count = count + (16-buffer_pointer)
+	  else
+		  memcpy(buf1(buffer_pointer),data_data(0),data_len)
+		  buffer_pointer = buffer_pointer + data_len
+		  count = count + data_len
+	  end if
+	
+      call attributes_write(xgatt_rx_buf_count, 0, 1, count)
+  
+      if count=$10
+        call attributes_write(xgatt_rx, 0, 16, buf1(0:16))
+	    buffer_pointer = 0
+	    count = 0
+	    call attributes_write(xgatt_rx_buf_count, 0, 1, 0)
+      end if
+    end if
+  end if
 end
-# Connection event listener
+
+
 event connection_status(connection, flags, address, address_type, conn_interval, timeout, latency, bonding)
-  # device just connected
+	
+ 	connected = 1
 end
-
 
 # Disconnection event
-event connection_disconnected(handle,result)
+event connection_disconnected(connection, reason)
 	# broadcast yourself and make bondable
 	call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)
-	call sm_set_bondable_mode(1)
+	
+	connected = 0
 end
