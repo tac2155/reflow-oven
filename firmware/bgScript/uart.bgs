@@ -1,4 +1,5 @@
 # BGScript Code to run UART on BLE112
+# credit to Michael Kroll's BLE_Shield
 
 # used for internal data buffer
 dim buf1(16)
